@@ -9,8 +9,8 @@ function App() {
       const text = await res.text();
       setMessage(text);
     } catch (err) {
-      console.error("에러 발생:", err);
-      setMessage("서버 응답 실패");
+      console.error("에러 발생!!!:", err);
+      setMessage("서버 응답 실패!!!");
     }
   };
 
