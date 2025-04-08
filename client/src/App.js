@@ -5,18 +5,12 @@ function App() {
 
   const handleClick = async () => {
     try {
-      const res = await fetch("https://test-render1-7ia3.onrender.com");
-  
-      if (!res.ok) {
-        throw new Error(`서버 응답 에러: ${res.status}`);
-      }
-  
+      const res = await fetch("https://test-render1-7ia3.onrender.com/api/hello");
       const text = await res.text();
-      console.log("응답 결과:", text);
       setMessage(text);
-    } catch (error) {
-      console.error("요청 중 에러 발생:", error);
-      setMessage("서버 오류가 발생했습니다.");
+    } catch (err) {
+      console.error("에러 발생:", err);
+      setMessage("서버 응답 실패");
     }
   };
 

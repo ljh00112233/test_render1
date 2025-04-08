@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 
-app.get("/", (req, res) => {
+app.get("/api/hello", (req, res) => {
   res.send("안녕하세요!");
 });
 
