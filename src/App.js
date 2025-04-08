@@ -4,7 +4,7 @@ function App() {
   const [message, setMessage] = useState("");
 
   const handleClick = async () => {
-    const res = await fetch("https://test-render-p497.onrender.com");
+    const res = await fetch("https://test-render1-7ia3.onrender.com");
     const text = await res.text();
     setMessage(text);
   };
