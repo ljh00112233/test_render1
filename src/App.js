@@ -4,9 +4,20 @@ function App() {
   const [message, setMessage] = useState("");
 
   const handleClick = async () => {
-    const res = await fetch("https://test-render1-7ia3.onrender.com");
-    const text = await res.text();
-    setMessage(text);
+    try {
+      const res = await fetch("https://test-render1-7ia3.onrender.com");
+  
+      if (!res.ok) {
+        throw new Error(`서버 응답 에러: ${res.status}`);
+      }
+  
+      const text = await res.text();
+      console.log("응답 결과:", text);
+      setMessage(text);
+    } catch (error) {
+      console.error("요청 중 에러 발생:", error);
+      setMessage("서버 오류가 발생했습니다.");
+    }
   };
 
   return (
