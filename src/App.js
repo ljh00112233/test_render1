@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
 
 function App() {
+  const [message, setMessage] = useState("");
+
+  const handleClick = async () => {
+    const res = await fetch("https://test-render-p497.onrender.com");
+    const text = await res.text();
+    setMessage(text);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: "2rem" }}>
+      <h1>서버에서 메시지 받아오기</h1>
+      <button onClick={handleClick}>불러오기</button>
+      <p>{message}</p>
     </div>
   );
 }
