@@ -5,7 +5,7 @@ function App() {
 
   const handleClick = async () => {
     try {
-      const res = await fetch("https://test-render1-7ia3.onrender.com/api/hello");
+      const res = await fetch("https://test-render1-u47s.onrender.com");
       const text = await res.text();
       setMessage(text);
     } catch (err) {
