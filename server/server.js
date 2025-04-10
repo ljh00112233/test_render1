@@ -39,7 +39,7 @@ app.post("/chat", async(req,res) => {
 
 app.get("/air", async (req, res) => {
   const airkorea = process.env.AIRKOREA_API_KEY
-  const url = `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc?serviceKey=${airkorea}&returnType=json&numOfRows=2&pageNo=1&sidoName=서울&ver=1.0`;
+  const url = `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=${airkorea}&returnType=json&numOfRows=2&pageNo=1&sidoName=서울&ver=1.0`;
 
   try {
     const res = await fetch(url);
