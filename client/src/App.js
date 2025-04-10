@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function App() {
   const [title, setTitle] = useState("");
   const [keywords, setKeywords] = useState([""]);
   const [diary, setDiary] = useState("");
   const [loading, setLoading] = useState(false);
+  const [air, setAir] = useState(null);
+
+  useEffect(() => {
+    const fetchDust = async () => {
+      const res = await fetch("https://test-render1-u47s.onrender.com/air");
+      const data = await res.json();
+      console.log("💨 미세먼지:", data);
+      setAir(data);
+    };
+    fetchDust();
+  }, []);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -86,6 +97,14 @@ function App() {
           <p>{diary}</p>
         </div>
       </div>
+      {air && (
+        <div style={{ marginTop: "2rem", padding: "1rem", border: "1px solid #ccc", borderRadius: "8px" }}>
+        <h3>오늘의 미세먼지 정보 (서울)</h3>
+        <p>📅 측정 시간: {air.dataTime}</p>
+        <p>🌫️ 미세먼지(PM10): {air.pm10.value}㎍/㎥ ({air.pm10.grade})</p>
+        <p>🌁 초미세먼지(PM2.5): {air.pm25.value}㎍/㎥ ({air.pm25.grade})</p>
+      </div>
+      )}
     </div>
   );
 }
