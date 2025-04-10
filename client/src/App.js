@@ -71,13 +71,7 @@ function App() {
         value={title}
         onChange={handleTitleChange}
         placeholder="제목을 입력하세요"
-      />
-      <input 
-        value={title}
-        onChange={handleTitleChange}
-        placeholder="제목을 입력하세요"
-      />
-      
+      />    
       {keywords.map((keyword, index) => (
         <input
           key={index}
