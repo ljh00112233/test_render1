@@ -40,8 +40,7 @@ app.post("/chat", async(req,res) => {
 
 //미세먼지 api
 app.get("/air", async (req, res) => {
-  const airkorea = process.env.AIRKOREA_API_KEY
-  const url = `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=${airkorea}&returnType=json&numOfRows=2&pageNo=1&sidoName=서울&ver=1.0`;
+  const url = `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=${process.env.AIRKOREA_API_KEY}&returnType=json&numOfRows=2&pageNo=1&sidoName=서울&ver=1.0`;
 
   try {
     const response = await fetch(url);
@@ -96,7 +95,7 @@ app.get("/weather", async (req, res) => {
     if (selectedHourStr < now.getHours().toString().padStart(2, "0")) {
       // 초단기실황 우선 시도
       const ncstTime = time;
-      let ncstUrl = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=${process.env.KMA_API_KEY}&dataType=JSON&base_date=${baseDate}&base_time=${ncstTime}&nx=60&ny=127&numOfRows=100`;
+      let ncstUrl = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=${process.env.WEATHER_API_KEY}&dataType=JSON&base_date=${baseDate}&base_time=${ncstTime}&nx=60&ny=127&numOfRows=100`;
       let ncstRes = await fetch(ncstUrl);
       let ncstData = await ncstRes.json();
       const items = ncstData.response.body.items.item;
@@ -123,7 +122,7 @@ app.get("/weather", async (req, res) => {
         baseTime = "2300";
       }
 
-      const vilageUrl = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${process.env.KMA_API_KEY}&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=60&ny=127&numOfRows=100`;
+      const vilageUrl = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${process.env.WEATHER_API_KEY}&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=60&ny=127&numOfRows=100`;
       const vilageRes = await fetch(vilageUrl);
       const vilageData = await vilageRes.json();
 
