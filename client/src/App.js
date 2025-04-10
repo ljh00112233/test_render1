@@ -91,14 +91,14 @@ function App() {
           <p>{diary}</p>
         </div>
       </div>
-
+      {air && (
         <div style={{ marginTop: "2rem", padding: "1rem", border: "1px solid #ccc", borderRadius: "8px" }}>
         <h3>오늘의 미세먼지 정보 (서울)</h3>
         <p>📅 측정 시간: {air.dataTime}</p>
         <p>🌫️ 미세먼지(PM10): {air.pm10.value}㎍/㎥ ({air.pm10.grade})</p>
         <p>🌁 초미세먼지(PM2.5): {air.pm25.value}㎍/㎥ ({air.pm25.grade})</p>
       </div>
-
+      )}
     </div>
   );
 }
