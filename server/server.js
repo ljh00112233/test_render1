@@ -22,7 +22,7 @@ app.post("/chat", async(req,res) => {
         { role : "user", content: message },
       ],
     });
-
+    
     if (!completion || !completion.choices || completion.choices.length === 0) {
       console.error("⚠️ GPT 응답이 비어 있음:", completion);
       return res.status(500).json({ error: "GPT 응답이 없습니다." });
