@@ -7,7 +7,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [air, setAir] = useState(null);
   const [weather, setWeather] = useState(null);
-  const [selectedTime, setSelectedTime] = useState("1000");
+  const [selectedTime, setSelectedTime] = useState("0000");
 
   const timeOptions = Array.from({ length: 24 }, (_, i) =>
     `${i.toString().padStart(2, "0")}00`
