@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 
 function App() {
+  const [title, setTitle] = useState("");
   const [keywords, setKeywords] = useState([""]);
   const [diary, setDiary] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
 
   const handleKeywordChange = (index, value) => {
     const newKeywords = [...keywords];
@@ -19,7 +24,7 @@ function App() {
 
   const generateDiary = async () => {
     setLoading(true);
-    const message = `다음 키워드를 바탕으로 일기를 작성해줘: ${keywords.filter(k => k.trim()).join(", ")}`;
+    const message = `제목은 "${title}"이고, 다음 키워드를 바탕으로 일기를 작성해줘: ${keywords.filter(k => k.trim()).join(", ")}`;
     const diaryContext = "너는 친절한 일기 작성 도우미야. 사용자에게 공감하며 자연스럽고 따뜻한 일기를 대신 써줘.";
 
     try {
@@ -51,6 +56,11 @@ function App() {
   return (
     <div>
       <h2>키워드를 기반으로 일기 자동 생성</h2>
+      <input 
+        value={title}
+        onChange={handleTitleChange}
+        placeholder="제목을 입력하세요"
+      />
       {keywords.map((keyword, index) => (
         <input
           key={index}
