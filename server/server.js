@@ -42,8 +42,8 @@ app.get("/air", async (req, res) => {
   const url = `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=${airkorea}&returnType=json&numOfRows=2&pageNo=1&sidoName=서울&ver=1.0`;
 
   try {
-    const res = await fetch(url);
-    const data = await res.json();
+    const response = await fetch(url);
+    const data = await response.json();
     const item = data.response.body.items[0];
 
     const result = {
