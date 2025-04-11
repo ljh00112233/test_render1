@@ -95,7 +95,7 @@ app.get("/weather", async (req, res) => {
     if (selectedHourStr < now.getHours().toString().padStart(2, "0")) {
       // 초단기실황 우선 시도
       const ncstTime = time;
-      let ncstUrl = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=${process.env.WEATHER_API_KEY}&dataType=JSON&base_date=${baseDate}&base_time=${ncstTime}&nx=60&ny=127&numOfRows=100`;
+      let ncstUrl = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=${process.env.WEATHER_API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDate}&base_time=${ncstTime}&nx=60&ny=127`;
       let ncstRes = await fetch(ncstUrl);
       let ncstData = await ncstRes.json();
       const items = ncstData.response.body.items.item;
@@ -122,7 +122,7 @@ app.get("/weather", async (req, res) => {
         baseTime = "2300";
       }
 
-      const vilageUrl = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${process.env.WEATHER_API_KEY}&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=60&ny=127&numOfRows=100`;
+      const vilageUrl = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${process.env.WEATHER_API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=60&ny=127`;
       const vilageRes = await fetch(vilageUrl);
       const vilageData = await vilageRes.json();
 
