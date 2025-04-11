@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 function aidiary() {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [keywords, setKeywords] = useState([""]);
   const [diary, setDiary] = useState("");
