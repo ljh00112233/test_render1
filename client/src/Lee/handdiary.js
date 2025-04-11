@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import WeatherInfo from "./weatherInfo";
 import DustInfo from "./dustInfo";
 
 const handdiary = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [includeWeather, setIncludeWeather] = useState(false);
@@ -49,6 +51,7 @@ const handdiary = () => {
 
   return (
     <div>
+      <button onClick={() => { navigate('/') }}>홈화면</button>
       <h2>✍️ 직접 일기 쓰기</h2>
 
       <input
