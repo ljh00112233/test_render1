@@ -164,14 +164,25 @@ function App() {
       {weather && (
         <div style={{ marginTop: "1rem", padding: "1rem", border: "1px solid #ccc", borderRadius: "8px" }}>
           <h3>{formatTimeLabel(selectedTime)} ({weather.source})</h3>
-          {weather.items
-            .filter(item => CATEGORIES_TO_DISPLAY[weather.source]?.includes(item.category))
-            .map((item, idx) => (
+          {(() => {
+            const filtered = {};
+            weather.items
+              .filter(item => CATEGORIES_TO_DISPLAY[weather.source]?.includes(item.category))
+              .forEach(item => {
+                if (!filtered[item.category]) {
+                  filtered[item.category] = item;
+                }
+              });
+
+            const uniqueItems = Object.values(filtered);
+
+            return uniqueItems.map((item, idx) => (
               <p key={idx}>
                 <strong>{getKoreanLabel(item.category)}</strong>:{" "}
                 {getWeatherDescription(item.category, item.obsrValue || item.fcstValue)}
               </p>
-            ))}
+            ));
+          })()}
         </div>
       )}
       {/* 미세먼지 정보 */}
