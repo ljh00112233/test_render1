@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function aidiary() {
   const [title, setTitle] = useState("");
@@ -128,6 +129,7 @@ function aidiary() {
 
   return (
     <div>
+      <button onClick={() => {navigate('/')}}>홈화면</button>
       <h2>키워드를 기반으로 일기 자동 생성</h2>
       <input 
         value={title}
