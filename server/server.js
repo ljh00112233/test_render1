@@ -131,7 +131,10 @@ app.get("/weather", async (req, res) => {
         items: vilageData.response.body.items.item.filter(i => i.fcstTime === time),
       };
     }
-
+    console.log(time);
+    console.log(baseDate);
+    console.log(ncstTime)
+    console.log(currentTimeStr);
     res.status(200).json(result);
   } catch (error) {
     console.error("❌ 날씨 데이터 불러오기 실패:", error.message);
