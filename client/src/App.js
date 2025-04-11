@@ -9,8 +9,8 @@ const App = () => { //라우터 설정
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/handdiary" element={<HandDiary />} />
-          <Route path="/aidiary" element={<AiDiary />} />
+          <Route path="/handdiary" element={<EnvProvider><HandDiary /></EnvProvider>} />
+          <Route path="/aidiary" element={<EnvProvider><AiDiary /></EnvProvider>} />
         </Routes>
       </BrowserRouter>
     </div>
