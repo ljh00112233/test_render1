@@ -133,7 +133,6 @@ app.get("/weather", async (req, res) => {
     }
     console.log(time);
     console.log(baseDate);
-    console.log(ncstTime)
     console.log(currentTimeStr);
     res.status(200).json(result);
   } catch (error) {
