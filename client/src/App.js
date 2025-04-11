@@ -8,6 +8,10 @@ function App() {
   const [air, setAir] = useState(null);
   const [weather, setWeather] = useState(null);
   const [selectedTime, setSelectedTime] = useState("0000");
+  const [includeWeather, setIncludeWeather] = useState(false);
+  const [includeMood, setIncludeMood] = useState(false);
+  const [userWeather, setUserWeather] = useState('');
+  const [userMood, setUserMood] = useState('');
 
   const timeOptions = Array.from({ length: 24 }, (_, i) =>
     `${i.toString().padStart(2, "0")}00`
@@ -50,7 +54,13 @@ function App() {
 
   const generateDiary = async () => {
     setLoading(true);
-    const message = `제목은 "${title}"이고, 다음 키워드를 바탕으로 일기를 작성해줘: ${keywords.filter(k => k.trim()).join(", ")}`;
+    const message = `제목은 "${title}"이고, 다음 키워드를 바탕으로 일기를 작성해줘: ${keywords.filter(k => k.trim()).join(", ")}.`;
+    if(includeWeather && userWeather.trim()) {
+      message += `오늘의 날씨는 ${userWeather}야.`;
+    }
+    if(includeMood && userMood.trim()) {
+      message += `오늘 나의 기분은 ${userMood}야.`
+    }
     const diaryContext = "너는 친절한 일기 작성 도우미야. 사용자에게 공감하며 자연스럽고 따뜻한 일기를 대신 써줘.";
 
     try {
@@ -123,7 +133,44 @@ function App() {
         value={title}
         onChange={handleTitleChange}
         placeholder="제목을 입력하세요"
-      />    
+      />
+      <br/>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={includeWeather}
+            onChange={(e) => setIncludeWeather(e.target.checked)}
+          />
+          날씨 포함
+        </label>
+        {includeWeather && (
+          <input
+            type="text"
+            placeholder="예: 맑음, 흐림"
+            value={userWeather}
+            onChange={(e) => setWeather(e.target.value)}
+          />
+        )}
+      </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={includeMood}
+            onChange={(e) => setIncludeMood(e.target.checked)}
+          />
+          기분 포함
+        </label>
+        {includeMood && (
+          <input
+            type="text"
+            placeholder="예: 기분이 좋아, 우울해"
+            value={userMood}
+            onChange={(e) => setMood(e.target.value)}
+          />
+        )}
+      </div>
       {keywords.map((keyword, index) => (
         <input
           key={index}
@@ -133,7 +180,7 @@ function App() {
         />
       ))}
       {keywords.length < 5 && <button onClick={addKeywordInput}>키워드 추가</button>}
-      <br />
+      <br/>
       <button onClick={generateDiary} disabled={loading}>
         {loading ? "생성 중..." : "일기 자동 생성"}
       </button>
