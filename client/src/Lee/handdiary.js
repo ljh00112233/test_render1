@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import WeatherInfo from "./weatherInfo";
+import DustInfo from "./dustInfo";
 
 const handdiary = () => {
   const [title, setTitle] = useState('');

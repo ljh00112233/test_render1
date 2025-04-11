@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import WeatherInfo from "./weatherInfo";
 import DustInfo from "./dustInfo";
-import { useEnv } from "./envContext";
 
 const aidiary = () => {
   const navigate = useNavigate();
