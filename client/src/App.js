@@ -54,7 +54,7 @@ function App() {
 
   const generateDiary = async () => {
     setLoading(true);
-    const message = `제목은 "${title}"이고, 다음 키워드를 바탕으로 일기를 작성해줘: ${keywords.filter(k => k.trim()).join(", ")}.`;
+    let message = `제목은 "${title}"이고, 다음 키워드를 바탕으로 일기를 작성해줘: ${keywords.filter(k => k.trim()).join(", ")}.`;
     if(includeWeather && userWeather.trim()) {
       message += `오늘의 날씨는 ${userWeather}야.`;
     }
@@ -149,7 +149,7 @@ function App() {
             type="text"
             placeholder="예: 맑음, 흐림"
             value={userWeather}
-            onChange={(e) => setWeather(e.target.value)}
+            onChange={(e) => setUserWeather(e.target.value)}
           />
         )}
       </div>
@@ -167,7 +167,7 @@ function App() {
             type="text"
             placeholder="예: 기분이 좋아, 우울해"
             value={userMood}
-            onChange={(e) => setMood(e.target.value)}
+            onChange={(e) => setUserMood(e.target.value)}
           />
         )}
       </div>
