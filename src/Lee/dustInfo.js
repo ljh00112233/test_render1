@@ -1,7 +1,7 @@
 import React from 'react';
-import { useEnv } from './envContext';
+import { useEnv } from './EnvContext';
 
-const dustInfo = () => {
+const DustInfo = () => {
     const { air } = useEnv();
     if(!air) return null;
     return (
@@ -14,4 +14,4 @@ const dustInfo = () => {
     );
 };
 
-export default dustInfo;
+export default DustInfo;
