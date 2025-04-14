@@ -39,7 +39,7 @@ const AiDiary = () => {
     const diaryContext = "너는 친절한 일기 작성 도우미야. 사용자에게 공감하며 자연스럽고 따뜻한 일기를 대신 써줘.";
 
     try {
-      const response = await fetch("https://aidiary.onrender.com/api/chat", {
+      const response = await fetch("https://test-render1-u47s.onrender.com/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

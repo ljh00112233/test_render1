@@ -23,7 +23,7 @@ const HandDiary = () => {
     }
 
     try {
-      const res = await fetch("https://aidiary.onrender.com/api/chat", {
+      const res = await fetch("https://test-render1-u47s.onrender.com/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
