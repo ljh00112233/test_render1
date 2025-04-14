@@ -9,8 +9,6 @@ const ResultAiDiary = () => {
   const location = useLocation();
   const { title, diary, weather, mood, date } = location.state || {};
 
-  const [editedDiary, setEditedDiary] = useState(diary);
-
   return (
     <div>
       <button onClick={() => navigate("/")}>홈으로</button>
@@ -19,14 +17,10 @@ const ResultAiDiary = () => {
       {weather && <p>☀️ 날씨: {weather}</p>}
       {mood && <p>😊 기분: {mood}</p>}
 
-      <h3>📝 생성된 일기</h3>
-      <textarea
-        value={editedDiary}
-        onChange={(e) => setEditedDiary(e.target.value)}
-        rows={15}
-        cols={80}
-        style={{ width: "100%" }}
-      />
+      <h3>📝 최종 일기</h3>
+      <div style={{ whiteSpace: "pre-wrap", border: "1px solid #ccc", padding: "1rem", borderRadius: "8px" }}>
+        {diary}
+      </div>
 
       <WeatherInfo />
       <DustInfo />

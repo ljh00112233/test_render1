@@ -10,6 +10,8 @@ const AiDiary = () => {
   const [includeMood, setIncludeMood] = useState(false);
   const [userWeather, setUserWeather] = useState('');
   const [userMood, setUserMood] = useState('');
+  const [generatedDiary, setGeneratedDiary] = useState("");
+  const [isGenerated, setIsGenerated] = useState(false);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -55,21 +57,26 @@ const AiDiary = () => {
 
       const data = await response.json(); // ✅ JSON 변환 필요
       console.log("📦 fetch 응답:", data);
-      navigate("/resultaidiary", {
-        state: {
-          title,
-          diary: data.reply?.content || "GPT 응답이 없습니다.",
-          weather: includeWeather ? userWeather : null,
-          mood: includeMood ? userMood : null,
-          date: new Date().toLocaleDateString('ko-KR')
-        }
-      });
+      setGeneratedDiary(data.reply?.content || "GPT 응답이 없습니다.");
+      setIsGenerated(true);
     } catch (error) {
       console.error("🔥 fetch 오류:", error);
       alert("GPT 응답에 실패했어요.");
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleComplete = () => {
+    navigate("/resultaidiary", {
+      state: {
+        title,
+        diary: generatedDiary,
+        weather: includeWeather ? userWeather : null,
+        mood: includeMood ? userMood : null,
+        date: new Date().toLocaleDateString('ko-KR'),
+      }
+    });
   };
 
   return (
@@ -128,9 +135,22 @@ const AiDiary = () => {
       ))}
       {keywords.length < 5 && <button onClick={addKeywordInput}>키워드 추가</button>}
       <br />
-      <button onClick={handelSubmit} disabled={loading}>
-        {loading ? "생성 중..." : "일기 자동 생성"}
+      <button onClick={handelSubmit} disabled={loading || isGenerated}>
+        {loading ? "생성 중..." : isGenerated ? "생성 완료!" : "일기 생성"}
       </button>
+      {generatedDiary && (
+        <div style={{ marginTop: "1rem" }}>
+          <h3>✏️ 생성된 일기 (수정 가능)</h3>
+          <textarea
+            value={generatedDiary}
+            onChange={(e) => setGeneratedDiary(e.target.value)}
+            rows={15}
+            cols={80}
+            style={{ width: "100%" }}
+          />
+          <button onClick={handleComplete}>✅ 완료</button>
+        </div>
+      )}
     </div>
   );
 }
