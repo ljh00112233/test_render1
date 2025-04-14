@@ -7,8 +7,8 @@ const handleResponse = async (res) => {
 };
   
 export const fetchDust = () =>
-fetch("https://test-render1-u47s.onrender.com/air").then(handleResponse);
+fetch("https://test-render1-u47s.onrender.com/api/air").then(handleResponse);
 
 export const fetchWeather = (time) =>
-fetch(`https://test-render1-u47s.onrender.com/weather?time=${time}`).then(handleResponse);
+fetch(`https://test-render1-u47s.onrender.com/api/weather?time=${time}`).then(handleResponse);
   
