@@ -37,7 +37,7 @@ const handdiary = () => {
       if (!res.ok) throw new Error("GPT API 호출 실패");
 
       const data = await res.json();
-      navigate('/result', {
+      navigate('/resulthanddiary', {
         state: {
           title,
           content,
@@ -57,7 +57,7 @@ const handdiary = () => {
 
   return (
     <div>
-      <button onClick={() => { navigate('/resulthanddiary') }}>홈화면</button>
+      <button onClick={() => { navigate('/') }}>홈화면</button>
       <h2>✍️ 직접 일기 쓰기</h2>
 
       <input
