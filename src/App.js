@@ -1,10 +1,14 @@
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import MainPage from "./MainPage";
-import AiDiary from "./Lee/aidiary";
-import HandDiary from "./Lee/handdiary";
-import ResultAiDiary from "./Lee/resultAidiary";
-import ResultHandDiary from "./Lee/resultHanddiary";
-import { EnvProvider } from "./Lee/envContext";
+import Test from "./Park/Test";
+import Register from "./Park/Register";
+import UserList from "./Park/UserList";
+import Login from "./Park/Login";
+import AiDiary from "./Lee/AiDiary";
+import HandDiary from "./Lee/HandDiary";
+import ResultAiDiary from "./Lee/ResultAiDiary";
+import ResultHandDiary from "./Lee/ResultHandDiary";
+import { EnvProvider } from "./Lee/EnvContext";
 
 const App = () => { //라우터 설정
   return (
@@ -12,15 +16,19 @@ const App = () => { //라우터 설정
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/handdiary" element={<EnvProvider><HandDiary /></EnvProvider>} />
-          <Route path="/aidiary" element={<EnvProvider><AiDiary /></EnvProvider>} />
-          <Route path="/resulthanddiary" element={<EnvProvider><ResultHandDiary /></EnvProvider>} />
-          <Route path="/resultaidiary" element={<EnvProvider><ResultAiDiary /></EnvProvider>} />
+          <Route path="/test" element={<Test />} />
+          <Route path="/Register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/UserList" element={<UserList />} />
+          <Route path="/HandDiary" element={<EnvProvider><HandDiary /></EnvProvider>} />
+          <Route path="/AiDiary" element={<EnvProvider><AiDiary /></EnvProvider>} />
+          <Route path="/ResultHandDiary" element={<EnvProvider><ResultHandDiary /></EnvProvider>} />
+          <Route path="/ResultAiDiary" element={<EnvProvider><ResultAiDiary /></EnvProvider>} />
         </Routes>
       </BrowserRouter>
     </div>
   );
-}
+};
 
 
 export default App;

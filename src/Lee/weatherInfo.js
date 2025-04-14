@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEnv } from './envContext';
+import { useEnv } from './EnvContext';
 
 const WeatherInfo = () => {
   const { weather, selectedTime, setSelectedTime } = useEnv();

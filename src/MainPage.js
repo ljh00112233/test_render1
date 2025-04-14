@@ -6,9 +6,12 @@ const MainPage = () => {
 
     return (
         <div>
-            안녕하세요.
-            <button onClick={() => {navigate('/handdiary')}}>직접일기</button>
+            안녕하세요.<br />
+            <button onClick={() => {navigate('/handdiary')}}>직접일기(Test.js)</button>
             <button onClick={() => {navigate('/aidiary')}}>AI일기</button>
+            <button onClick={() => {navigate('/register')}}>회원가입</button>
+            <button onClick={() => {navigate('/login')}}>로그인</button>
+            <button onClick={() => {navigate('/userlist')}}>회원목록</button>
         </div>
     );
 };

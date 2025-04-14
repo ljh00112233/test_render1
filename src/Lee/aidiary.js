@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import WeatherInfo from "./weatherInfo";
-import DustInfo from "./dustInfo";
 
-const aidiary = () => {
+const AiDiary = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [keywords, setKeywords] = useState([""]);
-  const [diary, setDiary] = useState("");
   const [loading, setLoading] = useState(false);
   const [includeWeather, setIncludeWeather] = useState(false);
   const [includeMood, setIncludeMood] = useState(false);
@@ -30,7 +27,7 @@ const aidiary = () => {
     }
   };
 
-  const generateDiary = async () => {
+  const handelSubmit = async () => {
     setLoading(true);
     let message = `제목은 "${title}"이고, 다음 키워드를 바탕으로 일기를 작성해줘: ${keywords.filter(k => k.trim()).join(", ")}.`;
     if (includeWeather && userWeather.trim()) {
@@ -42,7 +39,7 @@ const aidiary = () => {
     const diaryContext = "너는 친절한 일기 작성 도우미야. 사용자에게 공감하며 자연스럽고 따뜻한 일기를 대신 써줘.";
 
     try {
-      const response = await fetch("https://test-render1-u47s.onrender.com/api/chat", {
+      const response = await fetch("https://aidiary.onrender.com/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -58,10 +55,18 @@ const aidiary = () => {
 
       const data = await response.json(); // ✅ JSON 변환 필요
       console.log("📦 fetch 응답:", data);
-      setDiary(data.reply?.content || "GPT 응답이 없습니다.");
+      navigate("/resultaidiary", {
+        state: {
+          title,
+          diary: data.reply?.content || "GPT 응답이 없습니다.",
+          weather: includeWeather ? userWeather : null,
+          mood: includeMood ? userMood : null,
+          date: new Date().toLocaleDateString('ko-KR')
+        }
+      });
     } catch (error) {
       console.error("🔥 fetch 오류:", error);
-      setDiary("❌ 일기 생성 중 오류 발생");
+      alert("GPT 응답에 실패했어요.");
     } finally {
       setLoading(false);
     }
@@ -123,19 +128,11 @@ const aidiary = () => {
       ))}
       {keywords.length < 5 && <button onClick={addKeywordInput}>키워드 추가</button>}
       <br />
-      <button onClick={generateDiary} disabled={loading}>
+      <button onClick={handelSubmit} disabled={loading}>
         {loading ? "생성 중..." : "일기 자동 생성"}
       </button>
-      <div>
-        <div style={{ whiteSpace: "pre-wrap", marginTop: "1rem" }}>
-          {diary && <h3>생성된 일기</h3>}
-          <p>{diary}</p>
-        </div>
-      </div>
-      <WeatherInfo />
-      <DustInfo />
     </div>
   );
 }
 
-export default aidiary;
+export default AiDiary;

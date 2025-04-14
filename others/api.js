@@ -58,6 +58,7 @@ router.post("/chat", async (req, res) => {
 // ✅ 미세먼지 API
 router.get("/air", async (req, res) => {
   const url = `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?serviceKey=${process.env.AIRKOREA_API_KEY}&returnType=json&numOfRows=2&pageNo=1&sidoName=서울&ver=1.0`;
+  console.log('미세먼지 API process.env.AIRKOREA_API_KEY 값 : ', process.env.AIRKOREA_API_KEY);
 
   try {
     const response = await fetch(url);
@@ -100,6 +101,7 @@ router.get("/weather", async (req, res) => {
       let ncstRes = await fetch(ncstUrl);
       let ncstData = await ncstRes.json();
       const items = ncstData.response.body.items.item;
+      console.log('날씨 API WEATHER_API_KEY 값 : ', process.env.WEATHER_API_KEY);
 
       if (items && items.length > 0) {
         result = {

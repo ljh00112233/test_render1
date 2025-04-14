@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
-const handdiary = () => {
+const HandDiary = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -23,7 +23,7 @@ const handdiary = () => {
     }
 
     try {
-      const res = await fetch("https://test-render1-u47s.onrender.com/api/chat", {
+      const res = await fetch("https://aidiary.onrender.com/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -123,4 +123,4 @@ const handdiary = () => {
   );
 };
 
-export default handdiary;
+export default HandDiary;

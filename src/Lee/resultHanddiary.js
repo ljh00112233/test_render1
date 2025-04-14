@@ -1,9 +1,9 @@
 import React from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
-import WeatherInfo from "./weatherInfo";
-import DustInfo from "./dustInfo";
+import WeatherInfo from "./WeatherInfo";
+import DustInfo from "./DustInfo";
 
-const resultHanddiary = () => {
+const ResultHanddiary = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
 
@@ -34,4 +34,4 @@ const resultHanddiary = () => {
     );
 };
 
-export default resultHanddiary;
+export default ResultHanddiary;
