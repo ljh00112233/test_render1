@@ -57,7 +57,7 @@ const handdiary = () => {
 
   return (
     <div>
-      <button onClick={() => { navigate('/') }}>홈화면</button>
+      <button onClick={() => { navigate('/resulthanddiary') }}>홈화면</button>
       <h2>✍️ 직접 일기 쓰기</h2>
 
       <input
