@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import WeatherInfo from "./weatherInfo";
-import DustInfo from "./dustInfo";
 
 const handdiary = () => {
   const navigate = useNavigate();
@@ -11,10 +9,9 @@ const handdiary = () => {
   const [includeMood, setIncludeMood] = useState(false);
   const [weather, setWeather] = useState('');
   const [mood, setMood] = useState('');
-  const [comment, setComment] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleGenerateComment = async () => {
+  const handelSubmit = async () => {
     setLoading(true);
 
     let message = `다음은 사용자가 작성한 일기야. 공감해주고 따뜻한 코멘트를 남겨줘.\n\n제목: ${title}\n\n내용: ${content}`;
@@ -40,10 +37,19 @@ const handdiary = () => {
       if (!res.ok) throw new Error("GPT API 호출 실패");
 
       const data = await res.json();
-      setComment(data.reply?.content || "코멘트 응답 없음");
+      navigate('/result', {
+        state: {
+          title,
+          content,
+          weather: includeWeather ? weather : null,
+          mood: includeMood ? mood : null,
+          comment: data.reply?.content || "코멘트 응답 없음",
+          date: new Date().toLocaleDateString('ko-KR')
+        }
+      });
     } catch (error) {
       console.error("🔥 오류:", error);
-      setComment("❌ GPT 응답 중 오류가 발생했어요.");
+      alert("GPT 응답에 실패했어요.");
     } finally {
       setLoading(false);
     }
@@ -110,18 +116,9 @@ const handdiary = () => {
         )}
       </div>
 
-      <button onClick={handleGenerateComment} disabled={loading} style={{ marginTop: '1rem' }}>
+      <button onClick={handelSubmit} disabled={loading} style={{ marginTop: '1rem' }}>
         {loading ? "GPT 응답 중..." : "GPT 코멘트 받기"}
       </button>
-
-      {comment && (
-        <div style={{ marginTop: '2rem', padding: '1rem', border: '1px solid #ccc', borderRadius: '8px' }}>
-          <h3>GPT의 코멘트 💬</h3>
-          <p style={{ whiteSpace: 'pre-wrap' }}>{comment}</p>
-        </div>
-      )}
-      <WeatherInfo />
-      <DustInfo />
     </div>
   );
 };
