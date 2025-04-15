@@ -64,8 +64,6 @@ router.get("/air", async (req, res) => {
     const response = await fetch(url);
     const data = await response.json();
     const item = data.response.body.items[0];
-    console.log("📦 응답 상태 코드:", response.status);
-    console.log("📦 응답 콘텐츠 타입:", contentType);
     const result = {
       dataTime: item.dataTime,
       pm10: {
